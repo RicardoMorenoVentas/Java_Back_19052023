@@ -35,6 +35,6 @@ public class CursoServicio implements ICursoServicio{
 
     @Override
     public void eliminar(int id_curso) {
-        repositorio.eliminar(id_curso);
+        this.repositorio.eliminar(id_curso);
     }
 }
