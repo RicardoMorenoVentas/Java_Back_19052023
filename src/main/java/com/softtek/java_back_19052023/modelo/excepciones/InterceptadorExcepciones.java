@@ -1,7 +1,10 @@
 package com.softtek.java_back_19052023.modelo.excepciones;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,5 +26,11 @@ public class InterceptadorExcepciones extends ResponseEntityExceptionHandler {
     public ResponseEntity<ExcepcionRespuesta> manejarExcepcionRepetido(ExcepcionRepetido ex, WebRequest request ){
         ExcepcionRespuesta excepcion = new ExcepcionRespuesta(HttpStatus.CONFLICT,LocalDateTime.now(),ex.getMessage(),request.getDescription(false));
         return new ResponseEntity<>(excepcion, HttpStatus.CONFLICT);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+        ExcepcionRespuesta excepcion = new ExcepcionRespuesta(HttpStatus.NOT_FOUND,LocalDateTime.now(),ex.getMessage(),request.getDescription(false));
+        return new ResponseEntity<>(excepcion,HttpStatus.NOT_FOUND);
     }
 }
