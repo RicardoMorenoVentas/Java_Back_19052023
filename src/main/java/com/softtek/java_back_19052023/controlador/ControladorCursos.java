@@ -91,6 +91,7 @@ public class ControladorCursos {
      */
     @PostMapping(value = "/crearCurso", consumes = "application/json", produces = "application/json")
     public EntityModel<Curso> addCurso(@RequestBody Curso curs) throws ExcepcionRepetido {
+//    public ResponseEntity<Void> addCurso(@RequestBody Curso curs) throws ExcepcionRepetido {
         Curso out = this.servicio.crear(curs);
 //        Así es como lo tenía gabriela, no me gusta como es ya que no devuelve la URL del nuevo curso.
 //        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/cursos/{id}").buildAndExpand((out.getIdCurso())).toUri();
